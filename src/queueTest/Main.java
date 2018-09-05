@@ -3,12 +3,17 @@ package queueTest;
 import java.util.*;
 import java.util.concurrent.*;
 
+import test_1.*;
+import test_1.Stack;
+import test_3.Get_Redis;
+import test_3.Handle_Redis;
+import test_3.Stack_Redis;
+
 public class Main
 {
 
-	public static void main(String[] args)
+	static void Run1()
 	{
-
 		final Basket basket = new Basket();
 
 		// 定义苹果生产者
@@ -93,6 +98,72 @@ public class Main
 		}
 
 		service.submit(cs);
+	}
+
+	static void Test_3()
+	{
+		Stack stack = new Stack();
+		MThreadPop pop = new MThreadPop(stack);
+		MThreadPush push = new MThreadPush(stack);
+		pop.setRun(true);
+		push.setRun(true);
+		// sysPrint(stack);
+		// 向栈中循环添加数据
+		push.start();
+		// sysPrint(stack);
+		// 打印所有的栈的数据
+		pop.start();
+		// sysPrint(stack);
+		// ExecutorService service = Executors.newCachedThreadPool();
+		// service.submit(push);
+		// service.submit(pop);
+		try
+		{
+			sysPrint(stack);
+			Thread.sleep(10000);
+			// service.shutdownNow();
+
+			sysPrint(stack);
+
+			// push.setRun(false);
+			// pop.setRun(false);
+
+			// service.shutdown();
+			Thread.sleep(1000 * 2);
+		}
+		catch (InterruptedException e)
+		{
+			System.out.println("-------InterruptedException------------>end");
+			e.printStackTrace();
+		}
+		System.out.println("------------------->end");
+	}
+
+	private static void sysPrint(Stack stack)
+	{
+		System.out.println(stack.toString());
+	}
+
+	public static void main(String[] args)
+	{
+
+		Stack_Redis stack = new Stack_Redis(3);
+
+		Thread Get_Redis = new Thread(new Get_Redis(stack));
+
+		Thread Handle_Redis = new Thread(new Handle_Redis(stack));
+
+		Get_Redis.start();
+
+//		try
+//		{
+//			Thread.sleep(5 * 1000);
+//		}
+//		catch (Exception e)
+//		{
+//			// TODO: handle exception
+//		}
+		Handle_Redis.start();
 
 	}
 
