@@ -1,5 +1,6 @@
 package queueTest;
 
+import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.concurrent.*;
 
@@ -147,23 +148,32 @@ public class Main
 	public static void main(String[] args)
 	{
 
-		Stack_Redis stack = new Stack_Redis(3);
+		Stack_Redis stack = new Stack_Redis(10);
 
 		Thread Get_Redis = new Thread(new Get_Redis(stack));
-
-		Thread Handle_Redis = new Thread(new Handle_Redis(stack));
-
 		Get_Redis.start();
 
-//		try
-//		{
-//			Thread.sleep(5 * 1000);
-//		}
-//		catch (Exception e)
-//		{
-//			// TODO: handle exception
-//		}
-		Handle_Redis.start();
+		try
+		{
+			Thread.sleep(5 * 1000);
+		}
+		catch (Exception e)
+		{
+			// TODO: handle exception
+		}
+
+		// Thread Handle_Redis = new Thread(new Handle_Redis(stack));
+		// Handle_Redis.start();
+
+		Thread Handle_Redis;
+
+		for (int i = 0; i < 10; i++)
+		{
+			Handle_Redis = new Thread(new Handle_Redis(stack));
+
+			Handle_Redis.start();
+
+		}
 
 	}
 

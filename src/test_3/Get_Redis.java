@@ -12,23 +12,20 @@ public class Get_Redis implements Runnable
 		this.Stack = stack;
 	}
 
-
-
 	@Override
 	public void run()
 	{
-
-		while (true)
+		try
 		{
-			try
+			for (int i = 0; i < 10; i++)
 			{
-				Thread.sleep(5*1000);
+				// Thread.sleep(1 * 1000);
 				this.Handle();
 			}
-			catch (InterruptedException e)
-			{
-				e.printStackTrace();
-			}
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
 		}
 
 	}
@@ -39,12 +36,12 @@ public class Get_Redis implements Runnable
 		try
 		{
 			Num++;
-			System.out.println("生产者 = 开始取Redis数据放入仓库：" + System.currentTimeMillis());
+			System.out.println("生产者开始放入仓库：" + System.currentTimeMillis());
 
 			this.Stack.Push(String.valueOf(Num));
 
-			System.out.println("生产者 = 取Redis数据放入仓库完毕：" + System.currentTimeMillis());
-			System.out.println("生产者 = 取Redis数据后仓库有：" + Stack.getSize() + "条数据");
+			System.out.println("生产者放入仓库完毕：" + System.currentTimeMillis());
+			System.out.println("生产完后：" + Stack.getSize() + "条数据");
 
 		}
 		catch (InterruptedException e)
