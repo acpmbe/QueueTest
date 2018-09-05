@@ -148,7 +148,7 @@ public class Main
 	public static void main(String[] args)
 	{
 
-		Stack_Redis stack = new Stack_Redis(10);
+		Stack_Redis stack = new Stack_Redis(3);
 
 		Thread Get_Redis = new Thread(new Get_Redis(stack));
 		Get_Redis.start();
@@ -165,15 +165,15 @@ public class Main
 		// Thread Handle_Redis = new Thread(new Handle_Redis(stack));
 		// Handle_Redis.start();
 
-		Thread Handle_Redis;
-
-		for (int i = 0; i < 10; i++)
-		{
-			Handle_Redis = new Thread(new Handle_Redis(stack));
-
-			Handle_Redis.start();
-
-		}
+		// Thread Handle_Redis;
+		//
+		// for (int i = 0; i < 10; i++)
+		// {
+		// Handle_Redis = new Thread(new Handle_Redis(stack));
+		//
+		// Handle_Redis.start();
+		//
+		// }
 
 	}
 

@@ -17,7 +17,7 @@ public class Get_Redis implements Runnable
 	{
 		try
 		{
-			for (int i = 0; i < 10; i++)
+			for (int i = 0; i < 6; i++)
 			{
 				// Thread.sleep(1 * 1000);
 				this.Handle();
@@ -35,6 +35,7 @@ public class Get_Redis implements Runnable
 
 		try
 		{
+
 			Num++;
 			System.out.println("生产者开始放入仓库：" + System.currentTimeMillis());
 
